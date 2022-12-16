@@ -41,7 +41,7 @@ export default function Login():JSX.Element{
         const response = await FirebaseActions.login({email,password})
         setIsLoading(false)
         if(response.status === "success"){
-           window.location.assign("/dashboard")
+        //    window.location.assign("/dashboard")
         }else{
           notification.error({
             message:"Failed",

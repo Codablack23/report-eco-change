@@ -1,5 +1,6 @@
 import { FirebaseApp, FirebaseError, initializeApp } from "firebase/app";
-import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,deleteUser } from "firebase/auth";
+import {getFirestore,collection,addDoc} from "firebase/firestore";
 
 interface Response{
     status:string,
@@ -7,6 +8,9 @@ interface Response{
     user?:{
         [key:string]:any
     },
+    [key:string]:any
+}
+interface DocData{
     [key:string]:any
 }
 interface Data{
@@ -29,6 +33,7 @@ class FirebaseActions{
     }
     private app:FirebaseApp = initializeApp(this.config)
     private auth = getAuth(this.app)
+    private db = getFirestore(this.app)
 
     async login(data:Data):Promise<Response>{
       try {
@@ -49,8 +54,27 @@ class FirebaseActions{
         
         try {
             const user = await createUserWithEmailAndPassword(this.auth,data.email,data.password)
+            const dbResponse = await this.addDoc({
+                Name:data.full_name,
+                userID:user.user.uid
+            },
+                "collabo_profile"
+            )
+            if(dbResponse.status === "success"){
+                return {
+                    status:"success",
+                    user:user.user
+                }
+            }else{
+                await deleteUser(user.user)
+                return {
+                    status:"failed",
+                    error:dbResponse.error,
+                }
+            }
             
-          } catch (error) {            
+          } catch (error) {    
+            console.log(error)        
             return {
                 status:"failed",
                 error:(error as FirebaseError).message.toString(),
@@ -66,6 +90,23 @@ class FirebaseActions{
     }
     async googleLogin(){
 
+    }
+    async addDoc(data:DocData,dbName:string){
+         try {
+            const docRef = await addDoc(collection(this.db,dbName),{
+               ...data
+            })
+            return {
+                status:"success",
+                doc_id:docRef.id
+            }
+         } catch (error) {
+            console.log(error)
+            return {
+                status:"failed",
+                error:(error as FirebaseError).message.toString(),
+            }
+         }
     }
 
 }
