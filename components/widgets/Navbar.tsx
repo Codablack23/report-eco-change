@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState,useContext } from "react";
+import { AuthContext } from "~/contexts/AuthContext";
 
 export default function Navbar():JSX.Element{
- const [isLoggedIn,setisLoggedIn] = useState(false)
+ const {data} = useContext(AuthContext)
+ const {isLogged} = data
  return (
     <nav className="collabo-navbar collabo-container mx-auto flex items-center">
       <div className="brand">
@@ -20,7 +22,7 @@ export default function Navbar():JSX.Element{
         </Link>
       </div>
      {
-      isLoggedIn?(
+      isLogged?(
       <div className="collabo-nav-action flex items-center ml-auto">
          <p><i className="bi bi-bell-fill text-gray-600 text-xl"></i></p>
          <p className="mx-3"><i className="bi bi-person-circle text-gray-600 text-3xl"></i></p>

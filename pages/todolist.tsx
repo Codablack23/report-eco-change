@@ -1,5 +1,7 @@
-import {useEffect, useState} from 'react'
+import { useRouter } from 'next/router'
+import {useContext, useEffect, useState} from 'react'
 import HomeLayout from '~/components/layout/Home'
+import { AuthContext } from '~/contexts/AuthContext'
 
 const todoList = [
     {
@@ -110,6 +112,8 @@ function Todo({todo,task_id}:TodoProps){
     )
 }
 export default function TodoList(){
+    const Router = useRouter()
+    const {data} = useContext(AuthContext)
     const [task_id,setTaskId] = useState(0)
     function handleNext(){
        if(task_id < todoList.length - 1){
@@ -127,6 +131,14 @@ export default function TodoList(){
         }
         
      } 
+     useEffect(()=>{
+        function getUser(){
+           if(!data.isLogged){
+             window.location.assign(`/dashboard/login?next=${Router.pathname}`)
+           }
+        }
+        getUser()
+     },[data,Router])
     return (
         <HomeLayout>
           <div>

@@ -1,4 +1,5 @@
 import { Modal, notification, Spin } from "antd";
+import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 import HomeLayout from "~/components/layout/Home";
 import FirebaseActions from "~/utils/FirebaseActions";
@@ -60,6 +61,17 @@ export default function Register():JSX.Element{
         }
        }
     }
+    async function handleGoogleLogin(){
+      const response = await FirebaseActions.googleLogin()
+      if(response.status === "success"){
+         console.log(response)
+      }else{
+        notification.error({
+          message:"Failed",
+          description:<p>{response.error as string}</p>
+        })
+      }
+    }
     return (
        <HomeLayout>
         <section className="my-10">
@@ -103,12 +115,14 @@ export default function Register():JSX.Element{
               placeholder="Confirm Password"
               type="password"
               />
-              <button  className="my-2 w-full py-2 collabo-bg-theme rounded">Continue</button>
-              <button type="button" className="my-2 w-full py-2 collabo-outline border collabo-txt-theme rounded">
+              <button  className="my-2 w-full py-2 collabo-bg-theme">Continue</button>
+              <button type="button" onClick={handleGoogleLogin} className="my-2 w-full py-2 collabo-outline border collabo-txt-theme">
                 <i className="bi bi-google"></i>
-                <span> Register With Google</span>
+                <span>Continue With Google</span>
               </button>
-              <button type="button" className="my-2 w-full py-2 bg-black text-white rounded">Login</button>
+             <Link href={"/dashboard/login"}>
+               <button type="button" className="my-2 w-full py-2 bg-black text-white">Login</button>
+             </Link>
               </div>
             </form>
         </section>

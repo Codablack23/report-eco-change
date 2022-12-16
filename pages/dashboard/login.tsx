@@ -1,5 +1,6 @@
 import { Modal, notification, Spin } from "antd";
 import { FirebaseError } from "firebase/app";
+import Link from "next/link";
 import { Dispatch, SetStateAction, useState } from "react";
 import HomeLayout from "~/components/layout/Home";
 import FirebaseActions from "~/utils/FirebaseActions";
@@ -26,7 +27,17 @@ function Input({value,handler,errorMessage,placeholder,type,...extraProps}:input
      </div>
     )
 }
-
+async function handleGoogleLogin(){
+  const response = await FirebaseActions.googleLogin()
+  if(response.status === "success"){
+     console.log(response)
+  }else{
+    notification.error({
+      message:"Failed",
+      description:<p>{response.error as string}</p>
+    })
+  }
+}
 export default function Login():JSX.Element{
      const [isLoading,setIsLoading] = useState(false)
      const [email,setEmail] = useState("")
@@ -52,7 +63,7 @@ export default function Login():JSX.Element{
 
     return (
        <HomeLayout>
-        <section className="my-10">
+        <section className="my-10" style={{marginBottom:120}}>
             <Modal open={isLoading} centered footer={null} closable={false}>
                 <div className="flex w-full justify-between items-center">
                     <div className="text-center w-full">
@@ -81,11 +92,16 @@ export default function Login():JSX.Element{
               />
               <p className="text-sm font-bold"><i>Forgot Password?</i></p>
               <button className="my-2 w-full py-2 collabo-bg-theme">Login</button>
-              <button type="button" className="my-2 w-full py-2 collabo-outline border collabo-txt-theme">
+              <button 
+               type="button"
+               onClick={handleGoogleLogin}
+               className="my-2 w-full py-2 collabo-outline border collabo-txt-theme">
                 <i className="bi bi-google"></i>
                 <span> Login With Google</span>
               </button>
-              <button type="button" className="my-2 w-full py-2 bg-black text-white">Register</button>
+                 <Link href={"/dashboard/register"}>
+                 <button type="button" className="my-2 w-full py-2 bg-black text-white">Register</button>
+                </Link>
               </div>
             </form>
         </section>

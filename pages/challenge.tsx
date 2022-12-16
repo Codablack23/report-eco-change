@@ -11,10 +11,10 @@ interface TodoProps{
 
 function Challenge({todo}:TodoProps){
     return (
-        <div className="collabo-card p-3 mt-4 gap-3 rounded-lg md:grid grid-cols-3" id='todo'>
+        <div className="collabo-card p-3 mt-4 gap-3 md:grid grid-cols-3" id='todo'>
         <div>
-        <div className="bg-gray-300 rounded-lg p-2">
-            <div className="bg-gray-300 rounded-lg flex items-center justify-center" style={{height:"250px"}}>
+        <div className="bg-gray-300 p-2">
+            <div className="bg-gray-300 flex items-center justify-center" style={{height:"250px"}}>
                 <p className="font-bold-text-">Upload Activity Pictures</p>
             </div>
             <div className="flex justify-between">
@@ -22,14 +22,14 @@ function Challenge({todo}:TodoProps){
                 <button><i className="bi bi-upload"></i></button>
             </div>
         </div>
-        <button className="collabo-outline collabo-txt-theme border w-full my-2 py-2 rounded-lg">View Completion Rate</button>
+        <button className="collabo-outline collabo-txt-theme border w-full my-2 py-2 ">View Completion Rate</button>
         </div>
         <div className="col-span-2">
             <header>
                 <h3 className="text-3xl"><span className='font-bold'>Task </span>: {todo.title}</h3>
                 <p className="text-lg my-3">{todo.description}</p>
             </header>
-            <div className="collabo-card rounded-3xl w-full flex px-5 py-3 items-center justify-between">
+            <div className="collabo-card w-full flex px-5 py-3 items-center justify-between">
                 <input type="text" placeholder='Message' className="w-10/12 outline-none" />
                 <div className="flex items-center">
                     <button>
@@ -41,8 +41,8 @@ function Challenge({todo}:TodoProps){
                 </div>
             </div>
             <div className="flex items-center justify-end my-3">
-                <button className="collabo-outline collabo-txt-theme border p-2 mr-5 rounded-lg">Activity Checker</button>
-                <button className="collabo-bg-theme p-2 rounded-lg px-5">Save</button>
+                <button className="collabo-outline collabo-txt-theme border p-2 mr-5">Activity Checker</button>
+                <button className="collabo-bg-theme p-2  px-5">Save</button>
             </div>
             <div className="flex items-center py-3">
                 <p>

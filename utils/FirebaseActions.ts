@@ -1,6 +1,23 @@
-import { FirebaseApp, FirebaseError, initializeApp } from "firebase/app";
-import { getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,deleteUser } from "firebase/auth";
-import {getFirestore,collection,addDoc} from "firebase/firestore";
+import { 
+    FirebaseApp, 
+    FirebaseError, 
+    initializeApp
+ } from "firebase/app";
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    deleteUser,
+    GoogleAuthProvider
+ } from "firebase/auth";
+
+import {
+    getFirestore,
+    collection,
+    addDoc
+} from "firebase/firestore";
 
 interface Response{
     status:string,
@@ -22,6 +39,7 @@ interface SignUpData extends Data{
    [key:string]:string
 }
 class FirebaseActions{
+    private provider = new GoogleAuthProvider()
     private config={
         apiKey: "AIzaSyBou9F3wcBw83wLV4J3yIluZ_VfbdKhH8s",
         authDomain: "collabo-371719.firebaseapp.com",
@@ -84,12 +102,19 @@ class FirebaseActions{
     async logOut(){
 
     }
-  
-    async googleSignUp(){
-
-    }
     async googleLogin(){
-
+      try {
+        const result = await signInWithPopup(this.auth,this.provider)
+        return {
+            status:"success",
+            user:result.user
+        }
+      } catch (error) {
+        return {
+            status:"failed",
+            error:(error as FirebaseError).message.toString(),
+        }
+      }
     }
     async addDoc(data:DocData,dbName:string){
          try {
@@ -108,6 +133,10 @@ class FirebaseActions{
             }
          }
     }
+    getAuth(){
+        return this.auth
+    }
+    
 
 }
 
