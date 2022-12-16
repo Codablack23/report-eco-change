@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./setup/variables";
+@import "./setup/mixins";
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.collabo-outline{
+  border-color: $theme_color;
+}
+.collabo-container{
+  max-width: 1096px;
+  padding: $padding;
+}
+.collabo-txt-theme{
+  color: $theme_color;
+}
+.collabo-bg-theme{
+  background: $theme_color;
+  color: #fff;
+}
+.collabo-card{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+
