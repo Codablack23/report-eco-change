@@ -49,10 +49,8 @@ export default function Register():JSX.Element{
         const response = await FirebaseActions.signUp({email,password,full_name})
         setIsLoading(false)
         if(response.status === "success"){
-            notification.success({
-                message:"Account Created",
-                description:<p>you have successfully created an account with collabo please proceed to login to view dashboard</p>
-              })
+           window.location.assign("/dashboard")
+
         }else{
           notification.error({
             message:"Failed",
@@ -64,7 +62,7 @@ export default function Register():JSX.Element{
     async function handleGoogleLogin(){
       const response = await FirebaseActions.googleLogin()
       if(response.status === "success"){
-         console.log(response)
+        window.location.assign("/dashboard")
       }else{
         notification.error({
           message:"Failed",

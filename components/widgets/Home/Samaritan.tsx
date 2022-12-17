@@ -3,7 +3,7 @@ import {Image} from 'antd'
 export default function Samaritan(){
     return (
         <div className="ml-auto w-full">
-        <h3 className="font-black text-3xl py-3 px-3 bg-gray-300 collabo-txt-theme mb-2">Samaritan Of the Week</h3>
+        <h3 className="font-black text-3xl py-3 px-3 bg-gray-300 collabo-txt-theme mb-2">Good Samaritan Of the Week</h3>
          <div className="border border-gray-300 rounded-lg p-3 md:flex items-center">
           <div className='md:w-5/12 mr-3'>
             <Image src='/images/profile.png' preview={false} width={"100%"} className='rounded' alt='challenge'/>

@@ -1,7 +1,7 @@
 import {Carousel,Image} from 'antd'
 
 
-export default function CarouselComponent():JSX.Element{
+export default function CarouselComponent({openModal}:any):JSX.Element{
     const images = [
         // "/images/img1.png",
         // "/images/img2.png",
@@ -38,7 +38,7 @@ export default function CarouselComponent():JSX.Element{
      <p className="text-gray-700 text-sm">Source:The World Bank Group Organization</p>
      <p className="text-gray-700 text-sm">Lagos, Nigeria</p>
    </div>
-   <button className="collabo-bg-theme px-7 py-2 rounded-lg">See Statistics</button>
+   <button className="collabo-bg-theme px-7 py-2 rounded-lg" onClick={openModal}>See Statistics</button>
   </div>
   )
 }

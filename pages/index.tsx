@@ -1,21 +1,23 @@
-import { Modal } from 'antd'
 import Button from 'antd/es/button'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import HomeLayout from '~/components/layout/Home'
 import CarouselComponent from '~/components/widgets/Home/Carousel'
 import RedAlerts from '~/components/widgets/Home/RedAlerts'
 import Samaritan from '~/components/widgets/Home/Samaritan'
 import TodoList from '~/components/widgets/Home/TodoList'
 import WeeklyChallenge from '~/components/widgets/Home/WeeklyChallenge'
+import FullScreenModal from '~/components/widgets/Modal'
 
 const Home: NextPage = () => {
+  const [isOpen,setIsOpen] = useState(true)
   return (
     <HomeLayout>
       <div className="collabo-container m-auto">
-        
+      
        <div className="collabo-hero mt-6 mb-2 mx-auto text-center">
         <h3 className=" text-2xl md:text-5xl font-bold">Let&apos;s <span className="collabo-txt-theme">join hands together</span> to make our <span className='collabo-txt-theme'>environment clean</span> and <span className="collabo-txt-theme">safe</span> for <span className="collabo-txt-theme">all mankind!</span></h3>
         <div className="sub-title justify-center flex items-center my-5">
@@ -28,9 +30,17 @@ const Home: NextPage = () => {
        </div>
        <div className="md:grid md:grid-cols-2 md:gap-2 mt-5">
          <div>
-          <CarouselComponent/>
+          <CarouselComponent
+          openModal = {()=>setIsOpen(true)}
+          />
            <RedAlerts/>
           </div> 
+          <FullScreenModal 
+        isOpen={isOpen}
+        closeModal={()=>setIsOpen(false)}
+        >
+          <div></div>
+        </FullScreenModal>
          <div>
             <WeeklyChallenge/>
             <br />
