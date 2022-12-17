@@ -1,3 +1,4 @@
+import { Modal } from 'antd'
 import Button from 'antd/es/button'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -14,6 +15,7 @@ const Home: NextPage = () => {
   return (
     <HomeLayout>
       <div className="collabo-container m-auto">
+        
        <div className="collabo-hero mt-6 mb-2 mx-auto text-center">
         <h3 className=" text-2xl md:text-5xl font-bold">Let&apos;s <span className="collabo-txt-theme">join hands together</span> to make our <span className='collabo-txt-theme'>environment clean</span> and <span className="collabo-txt-theme">safe</span> for <span className="collabo-txt-theme">all mankind!</span></h3>
         <div className="sub-title justify-center flex items-center my-5">

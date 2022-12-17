@@ -26,7 +26,7 @@ export default function AchivementTab(){
            <ACard title="Recommendation" value={0} iconName="bi bi-pencil-fill"/>
            <ACard title="Flag" value={12} iconName="bi bi-flag-fill"/>
        </div>
-       <div className="p-2 flex items-center justify-between bg-gray-200 px-3 py-3">
+       <div className="p-2 md:flex items-center justify-between bg-gray-200 px-3 py-3">
         <div className="flex items-center">
             <i className="bi bi-trophy-fill"></i>
             <p className="mx-2">Total Points Gained</p>

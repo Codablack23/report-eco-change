@@ -5,11 +5,12 @@ import FirebaseActions from '~/utils/FirebaseActions'
 interface UserDetails{
     email:string | any,
     uid:string,
-    [key:string]:any
+    [key:string]:any,
 }
 interface UserData{
     isLogged:boolean
     user?:UserDetails|null
+    isLoading?:boolean
 }
 interface Data{
     data:UserData
@@ -17,7 +18,8 @@ interface Data{
 }
 export const AuthContext = createContext<Data>({
     data:{
-        isLogged:false
+        isLogged:false,
+        isLoading:true
     }
 })
 
@@ -25,6 +27,7 @@ export default function AuthContextProvider(props:any){
     const auth = FirebaseActions.getAuth()
     const [userData,setData] = useState<UserData>({
       isLogged:true,
+      isLoading:true
     })
     useEffect(() => {
         onAuthStateChanged(auth,(user)=>{
@@ -34,13 +37,15 @@ export default function AuthContextProvider(props:any){
             isLogged:true,
             user:{
                 ...user
-            }
+            },
+             isLoading:false
           }) 
          }
          else{
             setData({
                 isLogged:false,
-                user:null
+                user:null,
+                isLoading:true
             })
          }
         })
