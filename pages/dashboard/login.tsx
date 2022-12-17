@@ -28,17 +28,7 @@ function Input({value,handler,errorMessage,placeholder,type,...extraProps}:input
      </div>
     )
 }
-async function handleGoogleLogin(){
-  const response = await FirebaseActions.googleLogin()
-  if(response.status === "success"){
-     console.log(response)
-  }else{
-    notification.error({
-      message:"Failed",
-      description:<p>{response.error as string}</p>
-    })
-  }
-}
+
 export default function Login():JSX.Element{
      const router = useRouter()
      const [isLoading,setIsLoading] = useState(false)
@@ -63,6 +53,18 @@ export default function Login():JSX.Element{
           })
         }
      }
+     async function handleGoogleLogin(){
+      const response = await FirebaseActions.googleLogin()
+      if(response.status === "success"){
+           const next = router.query?.next
+           window.location.assign(next?(next as string):"/dashboard")
+      }else{
+        notification.error({
+          message:"Failed",
+          description:<p>{response.error as string}</p>
+        })
+      }
+    }
 
     return (
        <HomeLayout>
