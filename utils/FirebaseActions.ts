@@ -17,7 +17,12 @@ import {
 import {
     getFirestore,
     collection,
-    addDoc
+    addDoc,
+    getDoc,
+    getDocs,
+    query,
+    where,
+    doc
 } from "firebase/firestore";
 
 interface Response{
@@ -74,8 +79,12 @@ class FirebaseActions{
         try {
             const user = await createUserWithEmailAndPassword(this.auth,data.email,data.password)
             const dbResponse = await this.addDoc({
-                Name:data.full_name,
-                userID:user.user.uid
+                name:data.full_name,
+                userID:user.user.uid,
+                bio:"",
+                photoUrl:"",
+                location:""
+
             },
                 "collabo_profile"
             )
@@ -145,10 +154,31 @@ class FirebaseActions{
             }
          }
     }
+
+    // async getUserDoc(id:string){
+       
+    //     try {
+    //         const docRef = doc(this.db, "collabo_profile", id);
+    //         const docSnap = await getDoc(docRef);
+    //         return {
+    //             status:"success",
+    //             data:docSnap
+    //         }
+    //      } catch (error) {
+    //         console.log(error)
+    //         return {
+    //             status:"failed",
+    //             error:(error as FirebaseError).message.toString(),
+    //         }
+    //      }
+        
+    // }
     getAuth(){
         return this.auth
     }
-    
+    returnDoc(){
+        return this.db
+    }  
 
 }
 

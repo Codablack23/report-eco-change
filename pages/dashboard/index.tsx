@@ -5,6 +5,8 @@ import Tabs from "~/components/widgets/Dashboard/Tabs";
 import AchivementTab from "~/components/widgets/Dashboard/AchievementTabs";
 import NotificationsTab from "~/components/widgets/Dashboard/NotificationTab";
 import { AuthContext } from "~/contexts/AuthContext";
+import FirebaseActions from "~/utils/FirebaseActions";
+import { doc, getDoc, onSnapshot, where } from "firebase/firestore";
 
 function LoadingState(){
   return(
@@ -71,10 +73,22 @@ export default function Dashboard(){
        ]
 
       useEffect(()=>{
+        // async function getSingleDoc(id:string){
+        //   const db = FirebaseActions.returnDoc()
+        //   const docRef = doc(db,"collabo_profile");
+        //   const docSnap = await getDoc(docRef);
+          
+        //   if (docSnap.exists()) {
+        //     console.log("Document data:", docSnap.data());
+        //   } else {
+        //     // doc.data() will be undefined in this case
+        //     console.log("No such document!");
+        //   }
+        // }
         if(!data.isLogged){
             window.location.assign("/dashboard/login")
         }
-      })
+      },[data])
      const [chars,setChars] = useState(200)
      const bio = "I am PrinceNonso Ireogbu, a freelancer and an Intern with the Roothub Accelerator Systems, Portharcourt. I am a front-end web developer instructor. I am also a Blockchain marketer and Ambassador to a few crypto projects. I got passionate about helping to build a better climate after working for the Brokoli Network Project. One with the vision to save our environment as it keeps depleting every single day. With the help of the project, I have been able to plant some trees with my name on it. I am interested in keeping my family and friends safe and planting more trees do ensures that."
       return (

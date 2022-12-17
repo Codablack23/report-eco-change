@@ -30,13 +30,12 @@ export default function AuthContextProvider(props:any){
       isLoading:true
     })
     useEffect(() => {
-        onAuthStateChanged(auth,(user)=>{
+        onAuthStateChanged(auth,async(user)=>{
          if(user){
-          console.log(user)
           setData({
             isLogged:true,
             user:{
-                ...user
+                ...user,
             },
              isLoading:false
           }) 
