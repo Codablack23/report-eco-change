@@ -2,13 +2,14 @@ import { onAuthStateChanged } from 'firebase/auth'
 import {createContext,useEffect,useState} from 'react'
 import FirebaseActions from '~/utils/FirebaseActions'
 
+interface UserDetails{
+    email:string | any,
+    uid:string,
+    [key:string]:any
+}
 interface UserData{
     isLogged:boolean
-    user?:{
-     email:string,
-     userID:string,
-     [key:string]:any
-    }
+    user?:UserDetails|null
 }
 interface Data{
     data:UserData
@@ -32,14 +33,14 @@ export default function AuthContextProvider(props:any){
           setData({
             isLogged:true,
             user:{
-                email:user.email as string,
-                userID:user.uid
+                ...user
             }
           }) 
          }
          else{
             setData({
                 isLogged:false,
+                user:null
             })
          }
         })

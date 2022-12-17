@@ -1,6 +1,7 @@
 import { Modal, notification, Spin } from "antd";
 import { FirebaseError } from "firebase/app";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useState } from "react";
 import HomeLayout from "~/components/layout/Home";
 import FirebaseActions from "~/utils/FirebaseActions";
@@ -39,6 +40,7 @@ async function handleGoogleLogin(){
   }
 }
 export default function Login():JSX.Element{
+     const router = useRouter()
      const [isLoading,setIsLoading] = useState(false)
      const [email,setEmail] = useState("")
      const [password,setPassword] = useState("")
@@ -52,7 +54,8 @@ export default function Login():JSX.Element{
         const response = await FirebaseActions.login({email,password})
         setIsLoading(false)
         if(response.status === "success"){
-        //    window.location.assign("/dashboard")
+           const next = router.query?.next
+           window.location.assign(next?(next as string):"/dashboard")
         }else{
           notification.error({
             message:"Failed",

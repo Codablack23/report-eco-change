@@ -10,7 +10,8 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     deleteUser,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+    signOut
  } from "firebase/auth";
 
 import {
@@ -100,7 +101,18 @@ class FirebaseActions{
           }
     }
     async logOut(){
-
+      try {
+        await signOut(this.auth)
+        return {
+            status:"success",
+            message:"user logged Out Successfully"
+        }
+      } catch (error) {
+        return {
+            status:"failed",
+            error:(error as FirebaseError).message.toString(),
+        }
+      }
     }
     async googleLogin(){
       try {
