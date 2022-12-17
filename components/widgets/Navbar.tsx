@@ -30,7 +30,7 @@ export default function Navbar():JSX.Element{
         </Link>
       </div>
       <div className="collabo-navlist mx-3">
-        <Link href={"/"} legacyBehavior>
+        <Link href={"/stats"} legacyBehavior>
             <a className="mx-4 font-bold">Statistics</a>
         </Link> 
         <Link href={"/"} legacyBehavior>

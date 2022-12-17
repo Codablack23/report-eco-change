@@ -11,9 +11,10 @@ import Samaritan from '~/components/widgets/Home/Samaritan'
 import TodoList from '~/components/widgets/Home/TodoList'
 import WeeklyChallenge from '~/components/widgets/Home/WeeklyChallenge'
 import FullScreenModal from '~/components/widgets/Modal'
+import StatsComp from '~/components/widgets/Stats'
 
 const Home: NextPage = () => {
-  const [isOpen,setIsOpen] = useState(true)
+  const [isOpen,setIsOpen] = useState(false)
   return (
     <HomeLayout>
       <div className="collabo-container m-auto">
@@ -39,7 +40,10 @@ const Home: NextPage = () => {
         isOpen={isOpen}
         closeModal={()=>setIsOpen(false)}
         >
-          <div></div>
+          <div className='p-8'>
+            <StatsComp/>
+            <p className="text-center py-2">Statistics about Air Quality/Level Of Air Pollution </p>
+          </div>
         </FullScreenModal>
          <div>
             <WeeklyChallenge/>
